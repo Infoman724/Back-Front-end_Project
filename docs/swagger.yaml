@@ -1,0 +1,28 @@
+get:
+    tags:
+        - details
+    responses:
+        '200':
+            content:
+                application/json:
+                    schema:
+                        type: array
+                        items:
+                            type: string
+                    examples:
+                        Full details of a given game.:
+                            value: "{id: 1,name:\"Baldurs gate 3\",price: 10.99},\r\n{id: 2,name:\"Dota 2\",price: 20.99},\r\n{id: 3,name:\"Dayz\",price: 30.99}"
+            description: All good!
+        '404':
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/error'
+                    examples:
+                        Game /w+ was not found:
+                            value:
+                                error: Game \w+ was not found in game array.
+            description: Game was not found in games array.
+    operationId: id
+    summary: Ger full details of a game
+    description: Returns full details of a given id game
