@@ -18,6 +18,7 @@ const games = [
     {id: 8,name:"Grand Theft Auto V",price: 30.99}
 ]
 
+
 app.get('/games',(req,res)=>{
     res.send(games)
 })
