@@ -89,51 +89,24 @@ paths:
             summary: Get full details of game
             description: Returns full details of a given id game
         delete:
-            tags:
-                - delete
-            summary: Delete a game by ID
-            description: Deletes a game based on the provided ID.
-            parameters:
-                - name: id
-                  in: path
-                  description: The ID of the game to delete
-                  required: true
-                  schema:
-                      type: integer
-            requestBody:
-                description: ID of the game to delete
-                required: true
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                id:
-                                    type: integer
-                        example:
-                            id: 1
+            requestBody: {}
             responses:
                 '200':
-                    description: OK
                     content:
                         application/json:
                             schema:
-                                type: object
-                                properties:
-                                    message:
-                                        type: string
-                                example:
-                                    message: 'Game deleted successfully'
+                                $ref: '#/components/schemas/delete-game'
+                    description: All good
+                '204':
+                    description: Content not found
                 '404':
-                    description: Game not found
                     content:
                         application/json:
-                            schema:
-                                $ref: '#/components/schemas/error'
                             examples:
-                                GameNotFound:
+                                Example_error:
                                     value:
-                                        error: 'Game not found'
+                                        error: Cannot find game
+                    description: Not found
 components:
     schemas:
         error:
@@ -163,13 +136,14 @@ components:
                 name: Tetris
                 price: 0.99
         delete-game:
+            title: Root Type for delete-game
             description: ''
             required:
                 - id
             type: object
             properties:
                 id:
-                    description: ''
-                    type: string
+                    format: int32
+                    type: integer
             example:
-                id: 3
+                id: 1
